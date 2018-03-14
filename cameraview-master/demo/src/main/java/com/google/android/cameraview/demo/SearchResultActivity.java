@@ -48,11 +48,11 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class SearchResultActivity extends AppCompatActivity {
-//{"PII":{"address":"7w","age":"54","person_name":"tannu","sex":"female"},"message":"OK","status":0,"subject_id":3,"unable_detect_images":[]}
+    //{"PII":{"address":"7w","age":"54","person_name":"tannu","sex":"female"},"message":"OK","status":0,"subject_id":3,"unable_detect_images":[]}
     TextView takeImages, submitBtn, mBtnSearch;
     TextView name_edit, age_edit, address_edit, gender_edit;
     String name = "", age = "", sex = "", address = "";
-//    String gender[] = {"Sex", "Male", "Female"};
+    //    String gender[] = {"Sex", "Male", "Female"};
 //    MaterialSpinner spniner;
     DataHolderBitmap myHolder;
     JSONObject jsonObjectFinal = new JSONObject();
@@ -95,19 +95,19 @@ public class SearchResultActivity extends AppCompatActivity {
 
                 if (name.isEmpty()) {
 
-                    Toast.makeText(SearchResultActivity.this, "Please Enter your Name",
+                    Toast.makeText(SearchResultActivity.this, R.string.enter_name,
                             Toast.LENGTH_SHORT).show();
                 } else if (sex.isEmpty()) {
 
-                    Toast.makeText(SearchResultActivity.this, "Please Enter your Sex",
+                    Toast.makeText(SearchResultActivity.this, R.string.enter_sex,
                             Toast.LENGTH_SHORT).show();
                 } else if (age.isEmpty()) {
 
-                    Toast.makeText(SearchResultActivity.this, "Please Enter your Age",
+                    Toast.makeText(SearchResultActivity.this, R.string.enter_age,
                             Toast.LENGTH_SHORT).show();
                 } else if (address.isEmpty()) {
 
-                    Toast.makeText(SearchResultActivity.this, "Please Enter your Address",
+                    Toast.makeText(SearchResultActivity.this, R.string.enter_address,
                             Toast.LENGTH_SHORT).show();
                 } else {
                     Intent intent = new Intent(SearchResultActivity.this, EnrollMeActivity.class);
@@ -121,8 +121,8 @@ public class SearchResultActivity extends AppCompatActivity {
         mBtnSearch.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(SearchResultActivity.this, SearchActivity.class);
-                startActivityForResult(intent, 2);
+//                Intent intent = new Intent(SearchResultActivity.this, SearchActivity.class);
+//                startActivityForResult(intent, 2);
             }
         });
 
@@ -146,19 +146,19 @@ public class SearchResultActivity extends AppCompatActivity {
 
     public void submitdata() {
         JSONArray jsonObjectimages = new JSONArray();
-            for (int i = 0; i < SearchActivity.mEcodedImagesLsit.size(); i++) {
-                JSONArray jsonArray = new JSONArray();
-                jsonArray.put("image_" + Calendar.getInstance().getTimeInMillis() + ".jpg");
-                jsonArray.put(SearchActivity.mEcodedImagesLsit.get(i));
-                jsonObjectimages.put(jsonArray);
-            }
-            Log.e("arrayblist", "" + jsonObjectimages.length());
-            try {
-                jsonObjectFinal.put("images", jsonObjectimages);
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
-            SearchImages();
+        for (int i = 0; i < IntroActivity.mEcodedImagesLsit.size(); i++) {
+            JSONArray jsonArray = new JSONArray();
+            jsonArray.put("image_" + Calendar.getInstance().getTimeInMillis() + ".jpg");
+            jsonArray.put(IntroActivity.mEcodedImagesLsit.get(i));
+            jsonObjectimages.put(jsonArray);
+        }
+        Log.e("arrayblist", "" + jsonObjectimages.length());
+        try {
+            jsonObjectFinal.put("images", jsonObjectimages);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        SearchImages();
     }
 
 
@@ -176,18 +176,23 @@ public class SearchResultActivity extends AppCompatActivity {
                                 JSONObject jsonObject = new JSONObject(response.toString());
                                 int status = jsonObject.getInt("status");
                                 String msg = jsonObject.getString("message");
-                                if(jsonObject.has("PII")){
+                                if (jsonObject.has("PII")) {
                                     JSONObject jsonObjectPII = jsonObject.getJSONObject("PII");
-                                    name_edit.setText(jsonObjectPII.getString("person_name"));
-                                    gender_edit.setText(jsonObjectPII.getString("sex"));
-                                    age_edit.setText(jsonObjectPII.getString("age"));
-                                    address_edit.setText(jsonObjectPII.getString("address"));
-                                }else{
-                                    Toast.makeText(SearchResultActivity.this, "Unable to search your face",
+
+                                    if (jsonObjectPII.has("person_name")) {
+                                        name_edit.setText(jsonObjectPII.getString("person_name"));
+                                    } else if (jsonObjectPII.has("sex")) {
+                                        gender_edit.setText(jsonObjectPII.getString("sex"));
+                                    } else if (jsonObjectPII.has("age")) {
+                                        age_edit.setText(jsonObjectPII.getString("age"));
+                                    } else if (jsonObjectPII.has("address")) {
+                                        address_edit.setText(jsonObjectPII.getString("address"));
+                                    }
+                                } else {
+                                    Toast.makeText(SearchResultActivity.this, R.string.unable_to_detect_face,
                                             Toast.LENGTH_LONG).show();
                                 }
                                 progressBar.setVisibility(View.GONE);
-
 
 
                                 Log.e("response ", "" + msg);
@@ -202,23 +207,23 @@ public class SearchResultActivity extends AppCompatActivity {
                 @Override
                 public void onErrorResponse(VolleyError error) {
                     VolleyLog.d("TAG", "Error:   " + error.getMessage());
-try {
-    final int httpStatusCode = error.networkResponse.statusCode;
-    Log.e("status code", "" + httpStatusCode);
-    if (httpStatusCode == 500) {
-        Toast.makeText(SearchResultActivity.this, "error : Pictures are not taken in correct way. Make sure sure your images are taken correctly",
-                Toast.LENGTH_LONG).show();
+                    try {
+                        final int httpStatusCode = error.networkResponse.statusCode;
+                        Log.e("status code", "" + httpStatusCode);
+                        if (httpStatusCode == 500) {
+                            Toast.makeText(SearchResultActivity.this, R.string.error,
+                                    Toast.LENGTH_LONG).show();
 
-        // Http status code 401: Unauthorized.
-    } else {
-        Toast.makeText(SearchResultActivity.this, "error " + httpStatusCode,
-                Toast.LENGTH_LONG).show();
+                            // Http status code 401: Unauthorized.
+                        } else {
+                            Toast.makeText(SearchResultActivity.this, "error " + httpStatusCode,
+                                    Toast.LENGTH_LONG).show();
 
 
-    }
-}catch (Exception e){
-    e.printStackTrace();
-}
+                        }
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
                     progressBar.setVisibility(View.GONE);
 
                 }

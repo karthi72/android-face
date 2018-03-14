@@ -15,6 +15,8 @@
     <string name="app_name">CameraView Demo</string>
     <string name="camera_permission_confirmation">This app demonstrates the usage of CameraView. In order to do that, it needs permission to access camera.</string>
     <string name="camera_permission_not_granted">Camera app cannot do anything without camera permission.</string>
+    <string name="error">error : Pictures are not taken in correct way. Make sure sure your images are taken correctly</string>
+    <string name="unable_to_detect_face">Unable to search your face</string>
     <string name="picture_taken">Picture taken</string>
     <string name="aspect_ratio">Aspect ratio</string>
     <string name="switch_flash">Switch flash</string>
@@ -31,6 +33,11 @@
 
     <string name="next">Submit</string>
     <string name="success_msg">You are successfully register</string>
+
+    <string name="enter_name">Please Enter your Name</string>
+    <string name="enter_sex">Please Enter your Sex</string>
+    <string name="enter_age">Please Enter your Age</string>
+    <string name="enter_address">Please Enter your Address</string>
 
 
 </resources>

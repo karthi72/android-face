@@ -34,6 +34,7 @@ import android.os.Handler;
 import android.os.HandlerThread;
 import android.provider.MediaStore;
 import android.support.annotation.NonNull;
+import android.support.annotation.RequiresApi;
 import android.support.annotation.StringRes;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.ActivityCompat;
@@ -77,7 +78,7 @@ public class SearchActivity extends AppCompatActivity implements
     ProgressBar progressBar;
 
     private int PIC_CODE = 0;
-    int i =0;
+    int i = 0;
     private static final String TAG = "EnrollMeActivity";
 
     private static final int REQUEST_CAMERA_PERMISSION = 1;
@@ -117,19 +118,20 @@ public class SearchActivity extends AppCompatActivity implements
                         fab.setEnabled(false);
                         mEcodedImagesLsit.clear();
 
-                        new CountDownTimer(4000, 1000){
-                            public void onTick(long millisUntilFinished){
+                        new CountDownTimer(4000, 1000) {
+                            public void onTick(long millisUntilFinished) {
 
                                 progressBar.setVisibility(View.VISIBLE);
                                 mCameraView.takePicture();
 
                             }
-                            public  void onFinish(){
+
+                            public void onFinish() {
                                 progressBar.setVisibility(View.GONE);
 
                                 fab.setEnabled(true);
-                                Intent intent=new Intent(SearchActivity.this,SearchResultActivity.class);
-startActivity(intent);
+                                Intent intent = new Intent(SearchActivity.this, SearchResultActivity.class);
+                                startActivity(intent);
 //                                setResult(RESULT_OK,intent);
                                 finish();//finishing activity
                             }
@@ -147,7 +149,7 @@ startActivity(intent);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        progressBar = (ProgressBar)findViewById(R.id.progressBar) ;
+        progressBar = (ProgressBar) findViewById(R.id.progressBar);
         mCameraView = (CameraView) findViewById(R.id.camera);
         if (mCameraView != null) {
             mCameraView.addCallback(mCallback);
@@ -186,13 +188,13 @@ startActivity(intent);
                 Manifest.permission.READ_EXTERNAL_STORAGE)) {
             EnrollMeActivity.ConfirmationDialogFragment
                     .newInstance(R.string.camera_permission_confirmation,
-                            new String[]{Manifest.permission.CAMERA,Manifest.permission.WRITE_EXTERNAL_STORAGE,
+                            new String[]{Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE,
                                     Manifest.permission.READ_EXTERNAL_STORAGE},
                             REQUEST_CAMERA_PERMISSION,
                             R.string.camera_permission_not_granted)
                     .show(getSupportFragmentManager(), FRAGMENT_DIALOG);
         } else {
-            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.CAMERA,Manifest.permission.WRITE_EXTERNAL_STORAGE,
+            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE,
                             Manifest.permission.READ_EXTERNAL_STORAGE},
                     REQUEST_CAMERA_PERMISSION);
         }
@@ -219,7 +221,7 @@ startActivity(intent);
 
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions,
-            @NonNull int[] grantResults) {
+                                           @NonNull int[] grantResults) {
         switch (requestCode) {
             case REQUEST_CAMERA_PERMISSION:
                 if (permissions.length != 2 || grantResults.length != 2) {
@@ -302,6 +304,7 @@ startActivity(intent);
             Log.d(TAG, "onCameraClosed");
         }
 
+        @RequiresApi(api = Build.VERSION_CODES.N)
         @Override
         public void onPictureTaken(CameraView cameraView, final byte[] data) {
             Log.d(TAG, "onPictureTaken " + data.length);
@@ -341,38 +344,38 @@ startActivity(intent);
                 final Bitmap bitmap = bm;
                 mEcodedImagesLsit.add(imageEncoded);
 
-            getBackgroundHandler().post(new Runnable() {
-                @Override
-                public void run() {
-                    File file = new File(getExternalFilesDir(Environment.DIRECTORY_PICTURES),
-                            "CameraDemop/icture"+ Calendar.getInstance().getTimeInMillis()+".jpg");
-                    OutputStream outputStream = null;
-                    try {
-                        ContentValues values = new ContentValues();
-                        values.put(MediaStore.Images.Media.TITLE, "picture"+ Calendar.getInstance().getTimeInMillis()+".jpg");
-                        values.put(MediaStore.Images.Media.DATE_TAKEN, System.currentTimeMillis());
-                        values.put(MediaStore.Images.Media.MIME_TYPE, "image/jpeg");
-                        Uri filepath = getContentResolver().insert(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, values);
-                        outputStream = getContentResolver().openOutputStream(filepath);
+                getBackgroundHandler().post(new Runnable() {
+                    @Override
+                    public void run() {
+                        File file = new File(getExternalFilesDir(Environment.DIRECTORY_PICTURES),
+                                "CameraDemop/icture" + Calendar.getInstance().getTimeInMillis() + ".jpg");
+                        OutputStream outputStream = null;
+                        try {
+                            ContentValues values = new ContentValues();
+                            values.put(MediaStore.Images.Media.TITLE, "picture" + Calendar.getInstance().getTimeInMillis() + ".jpg");
+                            values.put(MediaStore.Images.Media.DATE_TAKEN, System.currentTimeMillis());
+                            values.put(MediaStore.Images.Media.MIME_TYPE, "image/jpeg");
+                            Uri filepath = getContentResolver().insert(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, values);
+                            outputStream = getContentResolver().openOutputStream(filepath);
 
-                        bitmap.compress(Bitmap.CompressFormat.JPEG, 100, outputStream);
-                        outputStream.close();
-                    } catch (IOException e) {
-                        Log.w(TAG, "Cannot write to " + file, e);
-                    } finally {
-                        if (outputStream != null) {
-                            try {
-                                outputStream.close();
-                            } catch (IOException e) {
-                                // Ignore
+                            bitmap.compress(Bitmap.CompressFormat.JPEG, 100, outputStream);
+                            outputStream.close();
+                        } catch (IOException e) {
+                            Log.w(TAG, "Cannot write to " + file, e);
+                        } finally {
+                            if (outputStream != null) {
+                                try {
+                                    outputStream.close();
+                                } catch (IOException e) {
+                                    // Ignore
+                                }
                             }
                         }
+
                     }
+                });
 
-                }
-            });
-
-            }catch (Exception e){
+            } catch (Exception e) {
                 e.printStackTrace();
             }
         }
@@ -387,7 +390,7 @@ startActivity(intent);
         private static final String ARG_NOT_GRANTED_MESSAGE = "not_granted_message";
 
         public static EnrollMeActivity.ConfirmationDialogFragment newInstance(@StringRes int message,
-                String[] permissions, int requestCode, @StringRes int notGrantedMessage) {
+                                                                              String[] permissions, int requestCode, @StringRes int notGrantedMessage) {
             EnrollMeActivity.ConfirmationDialogFragment
                     fragment = new EnrollMeActivity.ConfirmationDialogFragment();
             Bundle args = new Bundle();

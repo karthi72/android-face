@@ -1,0 +1,74 @@
+<resources>
+    <string name="app_name">Open Inference</string>
+
+    <!--Splash Screen-->
+    <string name="login">Login</string>
+    <string name="signup">Sign up</string>
+
+    <!--signup-->
+    <string name="name">Name</string>
+    <string name="gender">Gender</string>
+    <string name="male">Male</string>
+    <string name="female">Female</string>
+    <string name="age">Age</string>
+    <string name="address">Address</string>
+    <string name="submit">Submit</string>
+    <string name="next">Next</string>
+
+    <string name="name_validation">Please Enter your Name</string>
+    <string name="gender_validation">Please Select your Gender</string>
+    <string name="age_validation">Please Enter your Age</string>
+    <string name="address_validation">Please Enter your Address</string>
+    <string name="before_proceeding">before proceeding</string>
+    <string name="click_next_for_proceed">Click ok to proceed or cancel to Retake image.</string>
+
+    <!--My Account-->
+    <string name="myaccount">My Account</string>
+
+    <!--Contact us-->
+    <string name="contact_us">Contact Us</string>
+
+    <!--faq us-->
+    <string name="faq">FAQ</string>
+
+    <!--help-->
+    <string name="enter_name">Please Enter your Name</string>
+    <string name="enter_sex">Please Enter your Sex</string>
+    <string name="enter_age">Please Enter your Age</string>
+    <string name="enter_address">Please Enter your Address</string>
+    <string name="enroll_me">Enroll Me</string>
+    <string name="search_by_camera">Search by Camera</string>
+    <string name="search_by_gallery">Search by Gallery</string>
+    <string name="carema_text">The Search function take in 1 or 2 biometric images, uses a pretrained machine learning model to make predictions for each other, then uses a voting method to determine which prediction is correct. If the number of images is greater than 1, the search function perform a vote, where a plurality algorithm determine the correct subject.</string>
+    <string name="gallery_text">You can also choose images from the gallery Go to a directory of your choosing and select picture with faces. Once the Entrollment or Search actions commence, if any images are not suitable for processing, a message is given and images are automatically removed.</string>
+    <string name="enrollment_text">Our enrollment interface is configured to link Personally identifiable Information (PII) to an unencrypted biometric input. All downstream processing is on encrypted biometrics. The enrollment interface is configured to trigger deletion of the unencrypted biometric information.</string>
+    <string name="enroll_text_new">When you select the Enroll me button then this screen will be open. You will have to fill the information in it and then press next button</string>
+    <string name="camera_permission_confirmation">This app demonstrates the usage of CameraView. In order to do that, it needs permission to access camera.</string>
+    <string name="camera_permission_not_granted">Camera app cannot do anything without camera permission.</string>
+    <string name="unable_to_detect_face">Unable to search your face</string>
+    <string name="error">error : Pictures are not taken in correct way. Make sure sure your images are taken correctly</string>
+    <string name="already_enrolled">Already Enrolled</string>
+    <string name="do_you_want_to_view_pii_for_this_enrollment">Do you want to view PII for this entrollment</string>
+    <string name="ok">Ok</string>
+    <string name="info">Infomation</string>
+    <string name="cancel">Cancel</string>
+    <string name="yes">Yes</string>
+    <string name="try_another">Try another</string>
+    <string name="try_again">Try again</string>
+    <string name="error_string">error</string>
+    <string name="enrolled_successfully">Enrolled Successfully</string>
+    <string name="enrolled_successfully_text">You have been enrolled successfully, please login to view your PII for this enrollment.</string>
+
+
+    <string name="permission_camera_rationale">Access to the camera is needed for detection</string>
+    <string name="no_camera_permission">This application cannot run because it does not have the camera permission.  The application will now exit.</string>
+    <string name="low_storage_error">Face detector dependencies cannot be downloaded due to low device storage</string>
+    <string name="capture">Capture</string>
+    <string name="your_face_is_too_close_to_camera">Your face is too close to camera</string>
+    <string name="your_face_is_very_far_to_camera">Your face is very far to camera</string>
+    <string name="your_face_is_not_in_camera_area">Your face is not in camera area</string>
+    <string name="there_are_more_than_one_faces">There are more than 1 faces detected</string>
+    <string name="no_faces_detected">No faces detected</string>
+    <string name="successfully_enroll">Successfully Enrolled</string>
+
+</resources>

@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/root"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/white"
+    android:gravity="center"
+    android:orientation="vertical">
+
+    <include layout="@layout/toolbar" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_gravity="center"
+        android:layout_weight="1"
+        android:background="@android:color/white">
+
+        <RelativeLayout
+            android:layout_width="400dp"
+            android:layout_centerInParent="true"
+            android:layout_height="500dp">
+
+            <com.samplemakingapp.login.facedetection.CameraSourcePreview
+                android:id="@+id/preview"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:foregroundGravity="center">
+
+                <com.samplemakingapp.login.facedetection.GraphicOverlay
+                    android:id="@+id/faceOverlay"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:foregroundGravity="center"
+                    android:soundEffectsEnabled="true" />
+
+            </com.samplemakingapp.login.facedetection.CameraSourcePreview>
+
+
+            <ImageView
+                android:id="@+id/rl"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:background="@drawable/transparent_new1" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:visibility="gone">
+
+
+        </RelativeLayout>
+
+        <ProgressBar
+            android:id="@+id/progressBar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:layout_gravity="center"
+            android:indeterminate="true"
+            android:indeterminateTint="@color/colorPrimary"
+            android:indeterminateTintMode="src_atop"
+            android:visibility="gone" />
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/main_header_selector"
+        android:gravity="center"
+        android:paddingBottom="@dimen/margin_v"
+        android:paddingTop="@dimen/margin_v">
+
+        <ImageView
+            android:id="@+id/ivgCamera"
+            android:layout_width="wrap_content"
+            android:layout_centerInParent="true"
+            android:layout_height="wrap_content"
+            android:background="@drawable/camera" />
+        <TextView
+            android:id="@+id/txt_enable_camera"
+            android:layout_width="match_parent"
+            android:gravity="center"
+            android:textColor="@color/white"
+            android:layout_centerInParent="true"
+            android:layout_height="wrap_content" />
+
+    </RelativeLayout>
+
+</LinearLayout>

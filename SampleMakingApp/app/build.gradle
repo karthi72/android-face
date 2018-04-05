@@ -1,0 +1,67 @@
+buildscript {
+    repositories {
+        maven { url 'https://maven.fabric.io/public' }
+    }
+
+    dependencies {
+        classpath 'io.fabric.tools:gradle:1.+'
+    }
+}
+apply plugin: 'com.android.application'
+apply plugin: 'io.fabric'
+
+repositories {
+    maven { url 'https://maven.fabric.io/public' }
+}
+
+
+android {
+    compileSdkVersion rootProject.ext.compileSdkVersion
+    buildToolsVersion rootProject.ext.buildToolsVersion
+    defaultConfig {
+        applicationId "com.samplemakingapp"
+        minSdkVersion rootProject.ext.minSdkVersion
+        targetSdkVersion rootProject.ext.targetSdkVersion
+        versionCode 1
+        versionName "1.0"
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+}
+
+dependencies {
+    compile fileTree(include: ['*.jar'], dir: 'libs')
+    compile "com.android.support:design:$supportLibraryVersion"
+    // Tests
+    compile 'com.android.support.constraint:constraint-layout:1.0.2'
+    compile 'com.jaredrummler:material-spinner:1.2.4'
+    compile 'com.android.volley:volley:1.1.0'
+    compile "com.android.support:cardview-v7:$supportLibraryVersion"
+    compile "com.android.support:exifinterface:$supportLibraryVersion"
+    implementation 'com.github.esafirm.android-image-picker:imagepicker:1.9.5'
+    testCompile 'junit:junit:4.12'
+    implementation 'com.jakewharton:butterknife:8.8.1'
+    androidTestCompile('com.android.support.test:runner:0.5') {
+        exclude module: 'support-annotations'
+    }
+    androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2') {
+        exclude module: 'support-annotations'
+    }
+    // compile 'com.wonderkiln:camerakit:0.13.1'
+    //    compile 'com.otaliastudios:cameraview:1.5.0'
+//    compile 'com.afollestad:material-camera:0.4.4'
+    implementation project(':cameraview')
+    compile "uk.co.chrisjenx:calligraphy:$rootProject.ext.calligraphyVersion"
+    compile 'fr.avianey.com.viewpagerindicator:library:2.4.1.1@aar'
+    annotationProcessor 'com.jakewharton:butterknife-compiler:8.8.1'
+    compile('com.crashlytics.sdk.android:crashlytics:2.9.1@aar') {
+        transitive = true;
+    }
+    compile 'com.google.android.gms:play-services-vision:9.4.0+'
+
+}

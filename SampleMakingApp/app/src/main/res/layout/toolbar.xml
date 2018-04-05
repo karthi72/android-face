@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:orientation="horizontal"
+    android:id="@+id/toolbar"
+    android:background="@color/white"
+    android:layout_height="?attr/actionBarSize"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+
+    <android.support.v7.widget.Toolbar
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:minHeight="?attr/actionBarSize"
+        app:titleTextAppearance="?android:textAppearanceMedium"
+        app:titleTextColor="@color/colorPrimary"
+        />
+
+    <TextView
+        android:id="@+id/txHeader"
+        android:layout_width="wrap_content"
+        android:textColor="@color/black"
+        android:textAppearance="?android:textAppearanceMedium"
+        android:visibility="visible"
+        android:gravity="center"
+        android:padding="@dimen/margin_v"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:layout_height="wrap_content"
+        />
+
+    <ImageView
+        android:id="@+id/ivarrow"
+        android:layout_width="wrap_content"
+        android:background="@drawable/back_icon"
+        android:layout_margin="@dimen/margin_v"
+        android:layout_centerVertical="true"
+        android:layout_height="wrap_content" />
+
+    <TextView
+        android:id="@+id/txNext"
+        android:layout_width="wrap_content"
+        android:textColor="@color/colorPrimary"
+        android:textAppearance="?android:textAppearanceMedium"
+        android:visibility="gone"
+        android:text="@string/next"
+        android:gravity="end"
+        android:padding="@dimen/margin_v"
+        android:layout_alignParentEnd="true"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true" />
+
+</RelativeLayout>

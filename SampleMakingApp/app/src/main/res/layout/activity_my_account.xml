@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/white"
+    tools:context="com.enroll.applr.samplemakingapp.signup.SignupActivity">
+
+    <include layout="@layout/toolbar"
+        android:id="@+id/toolbar"></include>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_below="@+id/toolbar"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:orientation="vertical"
+            android:gravity="center"
+            android:layout_margin="@dimen/margin_x"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:text="@string/name"
+                android:textColor="@color/light_gray"
+                android:layout_marginTop="@dimen/margin_x"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:id="@+id/tvName"
+                android:layout_width="match_parent"
+                android:hint="@string/name"
+                android:textColorHint="@color/text_color"
+                android:textColor="@color/text_color"
+                android:background="@drawable/bg_edittext"
+                android:padding="@dimen/margin_v"
+                android:layout_marginTop="@dimen/margin_v"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:layout_height="wrap_content" />
+
+
+            <TextView
+                android:layout_width="match_parent"
+                android:text="@string/gender"
+                android:textColor="@color/light_gray"
+                android:layout_marginTop="@dimen/margin_x"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:id="@+id/tvGender"
+                android:layout_width="match_parent"
+                android:hint="@string/female"
+                android:textColor="@color/text_color"
+                android:background="@drawable/bg_edittext"
+                android:padding="@dimen/margin_v"
+                android:textColorHint="@color/text_color"
+                android:layout_marginTop="@dimen/margin_v"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:layout_height="wrap_content" />
+
+
+            <TextView
+                android:layout_width="match_parent"
+                android:text="@string/age"
+                android:textColor="@color/light_gray"
+                android:layout_marginTop="@dimen/margin_x"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:id="@+id/tvAge"
+                android:layout_width="match_parent"
+                android:hint="@string/age"
+                android:textColorHint="@color/text_color"
+                android:background="@drawable/bg_edittext"
+                android:padding="@dimen/margin_v"
+                android:textColor="@color/text_color"
+                android:layout_marginTop="@dimen/margin_v"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:layout_height="wrap_content" />
+
+
+            <TextView
+                android:layout_width="match_parent"
+                android:text="@string/address"
+                android:textColor="@color/light_gray"
+                android:layout_marginTop="@dimen/margin_x"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:id="@+id/tvAddress"
+                android:layout_width="match_parent"
+                android:hint="@string/address"
+                android:textColorHint="@color/text_color"
+                android:background="@drawable/bg_edittext"
+                android:padding="@dimen/margin_v"
+                android:textColor="@color/text_color"
+                android:layout_marginTop="@dimen/margin_v"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:layout_height="wrap_content" />
+
+
+        </LinearLayout>
+
+    </ScrollView>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_alignParentBottom="true"
+        android:orientation="horizontal"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_weight="1"
+            android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/ivgHelp"
+            android:layout_width="@dimen/camera_size"
+            android:layout_margin="@dimen/margin_x"
+            android:background="@drawable/help"
+            android:layout_height="@dimen/camera_size" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_weight="1"
+            android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/ivgContactus"
+            android:layout_width="@dimen/camera_size"
+            android:layout_margin="@dimen/margin_x"
+            android:background="@drawable/contact"
+            android:layout_height="@dimen/camera_size" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_weight="1"
+            android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/ivgFQ"
+            android:layout_width="@dimen/camera_size"
+            android:layout_margin="@dimen/margin_x"
+            android:background="@drawable/faq"
+            android:layout_height="@dimen/camera_size" />
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+
+
+</RelativeLayout>

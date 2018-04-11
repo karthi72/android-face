@@ -1,6 +1,7 @@
 package com.samplemakingapp.login;
 
 import android.Manifest;
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.Dialog;
 import android.content.ContentValues;
@@ -106,7 +107,7 @@ public class LoginActivity extends AppCompatActivity implements
     ProgressBar progressBar;
     @BindView(R.id.txt_enable_camera)
     TextView mTxtEnableCamera;
-        @BindView(R.id.ivgCamera)
+    @BindView(R.id.ivgCamera)
     ImageView mBtnCapture;
 
     @BindView(R.id.root)
@@ -160,28 +161,49 @@ public class LoginActivity extends AppCompatActivity implements
             txNext.setVisibility(View.GONE);
         }
         txNext.setVisibility(View.GONE);
-        int rc = ActivityCompat.checkSelfPermission(this, Manifest.permission.CAMERA);
-        if (rc == PackageManager.PERMISSION_GRANTED) {
-            createCameraSource();
-        } else {
-            requestCameraPermission();
-        }
-        mShutterCallback = new CameraSource.ShutterCallback() {
-            @Override
-            public void onShutter() {
-                Log.e("takePicture", "takePicture");
-            }
-        };
-        mPictureCallback = new CameraSource.PictureCallback() {
-            @Override
-            public void onPictureTaken(byte[] bytes) {
-                Log.e("onPictureTaken", "onPictureTaken");
-                onPicture(bytes);
-            }
-        };
+        initCamera();
 
     }
-
+private void initCamera(){
+    int rc = ActivityCompat.checkSelfPermission(this, Manifest.permission.CAMERA);
+    if (rc == PackageManager.PERMISSION_GRANTED) {
+        createCameraSource();
+    } else {
+        requestCameraPermission();
+    }
+    mShutterCallback = new CameraSource.ShutterCallback() {
+        @Override
+        public void onShutter() {
+            Log.e("takePicture", "takePicture");
+        }
+    };
+    mPictureCallback = new CameraSource.PictureCallback() {
+        @SuppressLint("MissingPermission")
+        @Override
+        public void onPictureTaken(byte[] bytes) {
+            Log.e("onPictureTaken", "onPictureTaken");
+//                if (mCameraSource != null) {
+//                    try {
+//                        mCameraSource.release();
+//                    } catch (NullPointerException ignored) {  }
+//                    mCameraSource = null;
+//                }
+//                if (cameraSource == null) {
+//                    releaseCamera();
+//                    return;
+//                }
+//
+//                mCameraSource = cameraSource;
+//                mCameraSource.start(mSurfaceView.getHolder());
+            try {
+                mPreview.start(mCameraSource, mGraphicOverlay);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            onPicture(bytes);
+        }
+    };
+}
     private void onPicture(byte[] data) {
         Log.d(TAG, "onPictureTaken " + data.length);
         try {
@@ -317,7 +339,7 @@ public class LoginActivity extends AppCompatActivity implements
         if (mToast != null) {
             mToast.cancel();
         }
-        mToast = Toast.makeText(this, mMsg +", "+ getString(R.string.try_again), Toast.LENGTH_SHORT);
+        mToast = Toast.makeText(this, mMsg + ", " + getString(R.string.try_again), Toast.LENGTH_SHORT);
         mToast.setGravity(Gravity.CENTER, 0, 0);
         mToast.show();
 
@@ -395,7 +417,7 @@ public class LoginActivity extends AppCompatActivity implements
                     }
                 });
             } else if (detectionResults.getDetectedItems().size() > 0) {
-                if(face.getHeight() > mScreenHeight/3 && face.getWidth() > mScreenWidth/3){
+                if (face.getHeight() > mScreenHeight / 3 && face.getWidth() > mScreenWidth / 3) {
                     mValidFaceFlag = "close";
                     runOnUiThread(new Runnable() {
                         @Override
@@ -551,7 +573,7 @@ public class LoginActivity extends AppCompatActivity implements
     public void submitdataLogin() {
         JSONArray jsonObjectimages = new JSONArray();
         int mListSize = mEcodedImagesLsit.size();
-        if(mListSize > 3){
+        if (mListSize > 3) {
             mListSize = 3;
         }
 
@@ -691,7 +713,7 @@ public class LoginActivity extends AppCompatActivity implements
             Log.e("mEcodedImagesLsit", mEcodedImagesLsit.size() + " ");
             if (mEcodedImagesLsit != null && mEcodedImagesLsit.size() > 0) {
                 int mListSize = mEcodedImagesLsit.size();
-                if(mListSize > 10){
+                if (mListSize > 10) {
                     mListSize = 10;
                 }
                 for (int i = 0; i < mListSize; i++) {
@@ -949,7 +971,15 @@ public class LoginActivity extends AppCompatActivity implements
         public void onTick(long millisUntilFinished) {
             mSingupCounterRunning = true;
             progressBar.setVisibility(View.VISIBLE);
-            mCameraSource.takePicture(mShutterCallback, mPictureCallback);
+            try {
+                mCameraSource.takePicture(mShutterCallback, mPictureCallback);
+            } catch (RuntimeException e) {
+                e.printStackTrace();
+                initCamera();
+            } catch (Exception e) {
+                e.printStackTrace();
+                initCamera();
+            }
             Log.e("CountDownTimer", "call");
         }
 
@@ -989,7 +1019,15 @@ public class LoginActivity extends AppCompatActivity implements
         public void onTick(long millisUntilFinished) {
             mLoginCounterRunning = true;
             progressBar.setVisibility(View.VISIBLE);
-            mCameraSource.takePicture(mShutterCallback, mPictureCallback);
+            try {
+                mCameraSource.takePicture(mShutterCallback, mPictureCallback);
+            } catch (RuntimeException e) {
+                initCamera();
+                e.printStackTrace();
+            } catch (Exception e) {
+                initCamera();
+                e.printStackTrace();
+            }
 
         }
 

@@ -49,12 +49,12 @@ public class ContactUs extends AppCompatActivity {
 
         if(getIntent().getStringExtra("key").equals("contact_us")){
             txHeader.setText(R.string.contact_us);
-            webview.loadUrl("http://www.openinference.com/contact.html");
+            webview.loadUrl("https://www.openinference.com/contact.html");
 
         }
         else {
             txHeader.setText(R.string.faq);
-            webview.loadUrl("http://www.openinference.com/faq.html");
+            webview.loadUrl("https://www.openinference.com/faq.html");
         }
 
         webview.setWebViewClient(new WebViewClient()
